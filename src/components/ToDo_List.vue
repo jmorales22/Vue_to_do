@@ -1,60 +1,56 @@
 <template>
   <div>
-    <div class="field is-grouped">
+    <form class="field is-grouped" @submit.prevent="addToDoListItem">
       <p class="control is-expanded">
         <input v-model="inputText" class="input" type="text" placeholder="Add ToDo Item" />
       </p>
       <p class="control">
-        <a class="button is-info" v-on:click="addToDoListItem()">
-          Add
-        </a>
+        <input type="submit" value="add" class="button is-info" />
       </p>
       <div class="content"></div>
-    </div>
+    </form>
     <div
       class="notification has-background-primary"
       v-for="todo in todos"
-      :key="todo.text"
+      :key="todo.id"
     >
-      <button class="delete" v-on:click="deleteToDoListItem(todo.text)"></button>
+      <button class="delete" v-on:click="deleteToDoListItem(todo.id)"></button>
       {{ todo.text }}
     </div>
   </div>
 </template>
 
 <script>
+import CreateToDoObject from './HelperFunctions/CreateToDoObject';
 export default {
   name: 'ToDo_List',
   data: function() {
     return {
-      todos: [
-        {
-          text: 'finish to do list',
-        },
-        {
-          text: 'clean the house',
-        },
-        {
-          text: 'wash the car',
-        },
-      ],
+      todos: [],
       inputText: ''
     };
   },
   methods: {
-    deleteToDoListItem: function(toDoText) {
+    deleteToDoListItem: function(toDoId) {
         for(let i = 0; i < this.todos.length; i++){
-            if(this.todos[i].text === toDoText){
+            if(this.todos[i].id === toDoId){
                 this.todos.splice(i, 1);
             }
         }
     },
     addToDoListItem: function(){
-        this.todos.push({text: this.inputText});
+    if(this.inputText === ''){
+        return;
+    }
+        this.todos.push(CreateToDoObject(this.inputText));
         this.inputText = '';
     }
   },
 };
 </script>
 
-<style></style>
+<style>
+form{
+    overflow: scroll;
+}
+</style>
