@@ -20,4 +20,8 @@
   }
 </script>
 
-<style></style>
+<style>
+.navbar{
+  margin-bottom: 20px;
+}
+</style>

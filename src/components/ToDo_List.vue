@@ -39,6 +39,9 @@ export default {
         }
     },
     addToDoListItem: function(){
+    if(this.inputText === ''){
+        return;
+    }
         this.todos.push(CreateToDoObject(this.inputText));
         this.inputText = '';
     }
@@ -46,4 +49,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+form{
+    overflow: scroll;
+}
+</style>
