@@ -1,15 +1,31 @@
 <template>
   <div class="container">
-  <div class="notification is-primary">
-    This container is <strong>centered</strong> on desktop and larger viewports.
+    <Header />
+    <ToDo_List />
+    <Footer />
   </div>
-</div>
 </template>
 
 <script>
+import Header from './Header'
+import ToDo_List from './ToDo_List'
+import Footer from './Footer'
+
   export default {
-    name: 'ToDo'
+    name: 'ToDo',
+    components: {
+      Header,
+      ToDo_List,
+      Footer
+    }
   }
 </script>
 
-<style></style>
+<style>
+    .container {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+        position: relative;
+    }
+</style>
