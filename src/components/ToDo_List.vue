@@ -2,10 +2,10 @@
   <div>
     <div class="field is-grouped">
       <p class="control is-expanded">
-        <input class="input" type="text" placeholder="Add ToDo Item" />
+        <input v-model="inputText" class="input" type="text" placeholder="Add ToDo Item" />
       </p>
       <p class="control">
-        <a class="button is-info">
+        <a class="button is-info" v-on:click="addToDoListItem()">
           Add
         </a>
       </p>
@@ -38,6 +38,7 @@ export default {
           text: 'wash the car',
         },
       ],
+      inputText: ''
     };
   },
   methods: {
@@ -48,6 +49,10 @@ export default {
             }
         }
     },
+    addToDoListItem: function(){
+        this.todos.push({text: this.inputText});
+        this.inputText = '';
+    }
   },
 };
 </script>
