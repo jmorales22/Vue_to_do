@@ -30,20 +30,30 @@ export default {
       inputText: ''
     };
   },
+  created: function(){
+   const cookieData = this.$cookies.get('jennifer_vue_todo');
+   this.todos = cookieData && cookieData.todos || [];
+  },
   methods: {
     deleteToDoListItem: function(toDoId) {
         for(let i = 0; i < this.todos.length; i++){
             if(this.todos[i].id === toDoId){
                 this.todos.splice(i, 1);
             }
-        }
+        } 
+        this.setToDoCookie();
     },
     addToDoListItem: function(){
     if(this.inputText === ''){
         return;
     }
         this.todos.push(CreateToDoObject(this.inputText));
+        this.setToDoCookie();
         this.inputText = '';
+    },
+    setToDoCookie: function(){
+        const stringifedTodos = JSON.stringify({'todos': this.todos})
+        this.$cookies.set('jennifer_vue_todo', stringifedTodos);
     }
   },
 };
